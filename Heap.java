@@ -53,5 +53,36 @@ class Heap<T extends Comparable<T>> {
         }
     }
 
+    private void verificarEsctructura(int index) {
+        int leftChildIndex = 2 * index + 1;
+        int rightChildIndex = 2 * index + 2;
+        int largestIndex = index;
+
+        if (leftChildIndex < heap.size() && heap.get(leftChildIndex).compareTo(heap.get(largestIndex)) > 0) {
+            largestIndex = leftChildIndex;
+        }
+        if (rightChildIndex < heap.size() && heap.get(rightChildIndex).compareTo(heap.get(largestIndex)) > 0) {
+            largestIndex = rightChildIndex;
+        }
+        if (largestIndex != index) {
+            intercambio(index, largestIndex);
+            verificarEsctructura(largestIndex);
+        }
+    }
+
+    private void intercambio(int index1, int index2) {
+        T temp = heap.get(index1);
+        heap.set(index1, heap.get(index2));
+        heap.set(index2, temp);
+    }
+    
+    public void mostrarDatosInsertados(Heap<?> heap) {
+        System.out.println("Datos insertados en el Heap:");
+        
+        while (!heap.isEmpty()) {
+        System.out.print("["+heap.remove()+"]");
+        }
+        System.out.println();
+    } 
 
 }
