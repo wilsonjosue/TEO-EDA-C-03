@@ -32,6 +32,26 @@ class Heap<T extends Comparable<T>> {
         }
         return root;
     }
-    
+
+    public T devolverElemento() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Heap is empty");
+        }
+        return heap.get(0);
+    }
+
+    public boolean isEmpty() {
+        return heap.isEmpty();
+    }
+
+    private void ajustarEstructura(int index) {
+        int parentIndex = (index - 1) / 2;
+        while (index > 0 && heap.get(index).compareTo(heap.get(parentIndex)) > 0) {
+            intercambio(index, parentIndex);
+            index = parentIndex;
+            parentIndex = (index - 1) / 2;
+        }
+    }
+
 
 }
